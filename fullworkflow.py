@@ -35,7 +35,7 @@ class workflow:
             "mediafolder":"/Users/shalevwiden/Downloads/youtubestuff/ChordScape/sep25-26/workingfolder",
             "vertical":True,
              "TargetDir": "/Users/shalevwiden/Downloads/youtubestuff/ChordScape/sep25-26/output",
-            "CustomName": f"output{self.time}",
+            "CustomName": f"output_{self.time}",
 
 
         }
@@ -156,11 +156,12 @@ def main():
     # workflow_obj.addtotimeline()
     # workflow_obj.renderandsave()
 
+# main()
+
 def just_render():
     workflow_obj=workflow()
     workflow_obj.renderandsave()
 
-# just_render()
+just_render()
 
 
-main()
