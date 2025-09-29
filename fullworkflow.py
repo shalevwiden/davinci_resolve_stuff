@@ -1,6 +1,7 @@
 import os
 import subprocess
 import time
+from datetime import datetime
 
 class workflow:
     '''
@@ -16,14 +17,25 @@ class workflow:
         # hmmmm
         self.medialocation=""
 
+        now = datetime.now()
+        self.time=now.strftime("%d %H:%M")  # e.g. "29 13:47"
+
+
+
+
+
+
+
+
         '''
         This is the only thing that needs to be changed actually
         '''
         self.variabledict={
-            "projectname":"earthvideo",
-            "mediafolder":"/Users/shalevwiden/Downloads/screenshots/degreeviewshort",
-             "TargetDir": "/Users/shalevwiden/Downloads/youtubestuff/widecode/degreeview_explained",
-            "CustomName": "degreeviewtest",
+            "projectname":"pianogrind",
+            "mediafolder":"/Users/shalevwiden/Downloads/youtubestuff/ChordScape/sep25-26/workingfolder",
+            "vertical":True,
+             "TargetDir": "/Users/shalevwiden/Downloads/youtubestuff/ChordScape/sep25-26/output",
+            "CustomName": f"output{self.time}",
 
 
         }
@@ -60,8 +72,35 @@ class workflow:
 
         }
 
-    def setup():
-        pass
+    def setup(self):
+        '''
+    
+        add more functions in the future
+        
+        '''
+        print(f'setting up ')
+        def set_settings():
+            # default stuff
+            settings = self.proj.GetSetting()
+            # settings is a dict object
+
+            # this should work
+            # for good apple quality
+            self.proj.SetCurrentRenderFormatAndCodec("mov", "ProRes422HQ")
+
+            # this works phew
+            vertical=self.variabledict['vertical']
+            if vertical:
+                # as a string
+                self.proj.SetSetting("timelineResolutionWidth",  "1080")   
+                self.proj.SetSetting("timelineResolutionHeight", "1920")
+                
+
+            self.pm.SaveProject()
+
+        set_settings()  
+
+
     def addtotimeline(self):
         clips=self.mp.ImportMedia(self.videofiles)
         print(f"Imported {len(self.videofiles)} files into Media Pool.")
@@ -78,6 +117,7 @@ class workflow:
         time.sleep(1)
         self.mp.AppendToTimeline(clips)	
         self.pm.SaveProject()	
+        res.OpenPage('edit')
         
     def edit_clips(self):
         '''
@@ -112,7 +152,15 @@ class workflow:
 
 def main():
     workflow_obj=workflow()
-    workflow_obj.addtotimeline()
+    workflow_obj.setup()
+    # workflow_obj.addtotimeline()
+    # workflow_obj.renderandsave()
+
+def just_render():
+    workflow_obj=workflow()
     workflow_obj.renderandsave()
+
+# just_render()
+
 
 main()
