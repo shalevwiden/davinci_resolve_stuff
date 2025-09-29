@@ -7,6 +7,9 @@ class workflow:
     Make different ones for this for different channels
 
     Then spend the full day grinding my ass off for each one
+
+    Copy paste this entire thing to generate a video fast.
+    The only thing that you need to change is self.variabledict
     '''
     def __init__(self):
         
