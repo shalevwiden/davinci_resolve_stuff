@@ -21,7 +21,6 @@ pm.SaveProject()
 
 
 # logic to get the media files
-videofiles = [os.path.join(mediafolder, f) for f in os.listdir(mediafolder) if f.lower().endswith(('.mov', '.mp4', '.avi'))]
 
 timeline_name = "Main Timeline"
 timeline = proj.GetCurrentTimeline()

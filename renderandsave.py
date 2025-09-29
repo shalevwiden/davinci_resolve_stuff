@@ -4,7 +4,7 @@ timeline = proj.GetCurrentTimeline()
 
 custom_settings = {
     "TargetDir": "/Users/shalevwiden/Downloads/youtubestuff/framesrendered",
-    "CustomName": "output_test"
+    "CustomName": "appledone1"
 }
 # can change output location and add a name to the file.
 
