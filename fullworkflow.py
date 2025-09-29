@@ -1,5 +1,6 @@
 import os
 import subprocess
+import time
 
 class workflow:
     '''
@@ -12,14 +13,19 @@ class workflow:
         # hmmmm
         self.medialocation=""
 
+        '''
+        This is the only thing that needs to be changed actually
+        '''
         self.variabledict={
             "projectname":"earthvideo",
-            "mediafolder":"/Users/shalevwiden/Downloads/youtubestuff/framesrendered/line_animations/apple",
-             "TargetDir": "/Users/shalevwiden/Downloads/youtubestuff/framesrendered",
-            "CustomName": "appledone1",
+            "mediafolder":"/Users/shalevwiden/Downloads/screenshots/degreeviewshort",
+             "TargetDir": "/Users/shalevwiden/Downloads/youtubestuff/widecode/degreeview_explained",
+            "CustomName": "degreeviewtest",
 
 
         }
+        if not os.path.exists(self.variabledict['TargetDir']):
+            os.mkdir(self.variabledict['TargetDir'])
 
         self.projectname=self.variabledict['projectname']
 
@@ -34,7 +40,7 @@ class workflow:
 
             return pm,proj,mp,projectname
 
-        self.pm,self.proj,self.mp,self.projectname=essentials()
+        self.pm,self.proj,self.mp,self.projectname=essentials(projectname=self.variabledict['projectname'])
 
 
         self.mediafolder = self.variabledict['mediafolder']
@@ -54,20 +60,21 @@ class workflow:
     def setup():
         pass
     def addtotimeline(self):
-        clips=mp.ImportMedia(self.videofiles)
+        clips=self.mp.ImportMedia(self.videofiles)
         print(f"Imported {len(self.videofiles)} files into Media Pool.")
-        pm.SaveProject()	
+        self.pm.SaveProject()	
 
 
         timeline_name = "Main Timeline"
-        timeline = proj.GetCurrentTimeline()
+        timeline = self.proj.GetCurrentTimeline()
 
         if not timeline:
-            timeline = mp.CreateEmptyTimeline(timeline_name)
+            timeline = self.mp.CreateEmptyTimeline(timeline_name)
 
         # clips is already a list
-        mp.AppendToTimeline(clips)	
-        pm.SaveProject()	
+        time.sleep(1)
+        self.mp.AppendToTimeline(clips)	
+        self.pm.SaveProject()	
         
     def edit_clips(self):
         '''
@@ -82,19 +89,27 @@ class workflow:
             pass
             
     def renderandsave(self):
+        time.sleep(1)
                 # in this file we will render and save the final product
-        timeline = proj.GetCurrentTimeline()
+        timeline = self.proj.GetCurrentTimeline()
         # current = timeline.GetRenderSettings()
 
         # can change output location and add a name to the file.
 
-        proj.SetRenderSettings(self.save_settings)	
+        self.proj.SetRenderSettings(self.save_settings)	
         # 2. Create a render job (returns a job ID you can track)
-        job_id = proj.AddRenderJob()
+        job_id = self.proj.AddRenderJob()
 
-        proj.StartRendering()
+        self.proj.StartRendering()
 
         # proj.SetCurrentTimeline(timeline) maybe this
 
         def helpful():
-            presets=proj.GetRenderPresetList()	
+            presets=self.proj.GetRenderPresetList()	
+
+def main():
+    workflow_obj=workflow()
+    workflow_obj.addtotimeline()
+    workflow_obj.renderandsave()
+
+main()
