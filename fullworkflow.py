@@ -31,9 +31,9 @@ class workflow:
         This is the only thing that needs to be changed actually
         '''
         self.variabledict={
-            "projectname":"pianogrind",
+            "projectname":"evan1",
             "mediafolder":"/Users/shalevwiden/Downloads/youtubestuff/ChordScape/sep25-26/workingfolder",
-            "vertical":True,
+            "vertical":False,
              "TargetDir": "/Users/shalevwiden/Downloads/youtubestuff/ChordScape/sep25-26/output",
             "CustomName": f"output_{self.time}",
 
@@ -153,15 +153,15 @@ class workflow:
 def main():
     workflow_obj=workflow()
     workflow_obj.setup()
-    # workflow_obj.addtotimeline()
+    workflow_obj.addtotimeline()
     # workflow_obj.renderandsave()
 
-# main()
+main()
 
 def just_render():
     workflow_obj=workflow()
     workflow_obj.renderandsave()
 
-just_render()
+# just_render()
 
 
