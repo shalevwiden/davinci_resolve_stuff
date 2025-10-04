@@ -31,14 +31,14 @@ class workflow:
         This is the only thing that needs to be changed actually
         '''
         self.variabledict={
-            "projectname":"evan1",
-            "mediafolder":"/Users/shalevwiden/Downloads/youtubestuff/ChordScape/sep25-26/workingfolder",
-            "vertical":False,
-             "TargetDir": "/Users/shalevwiden/Downloads/youtubestuff/ChordScape/sep25-26/output",
-            "CustomName": f"output_{self.time}",
+            "projectname":"100",
+            "mediafolder":"/Users/shalevwiden/Downloads/contentcreation/personal/insta/instapost_creative/100",
+            "vertical":True,
+             "TargetDir": "/Users/shalevwiden/Downloads/contentcreation/personal/insta/instapost_creative/",
+            "CustomName": f"output_{self.time}"}
 
 
-        }
+        
         if not os.path.exists(self.variabledict['TargetDir']):
             os.mkdir(self.variabledict['TargetDir'])
 
@@ -156,12 +156,12 @@ def main():
     workflow_obj.addtotimeline()
     # workflow_obj.renderandsave()
 
-main()
+# main()
 
 def just_render():
     workflow_obj=workflow()
     workflow_obj.renderandsave()
 
-# just_render()
+just_render()
 
 
